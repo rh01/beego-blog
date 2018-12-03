@@ -1,0 +1,55 @@
+{{template "header"}}
+
+<title>文章-我的个人博客</title>
+<link rel="stylesheet" href="/static/css/form.css" type="text/css">
+</head>
+<body>
+
+{{ template  "navbar" . }}
+<div class="container">
+    <h1>添加文章</h1>
+    <form action="/topic" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>文章标题</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>类别</label>
+            <input type="text" name="category" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="">文章内容</label>
+            <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>文章附件</label>
+            <input type="file" name="attachment"  class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-default">添加文章</button>
+
+    </form>
+</div>
+
+<script>
+    function checkInput() {
+        let uname = document.getElementById("name");
+        if (uname.value.length == 0) {
+            alert("請輸入分类名称");
+            return false
+        }
+
+        return true;
+    }
+
+</script>
+
+</div>
+<!-- Latest compiled and minified JS -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

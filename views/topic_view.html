@@ -1,0 +1,55 @@
+{{template "header"}}
+
+<title>{{.Topic.Title}}-我的个人博客</title>
+<link rel="stylesheet" href="/static/css/form.css" type="text/css">
+</head>
+<body>
+
+{{ template  "navbar" . }}
+<div class="container">
+    <h1>{{.Topic.Title}}
+{{if .IsLogin}} <a href="/topic/modify?tid={{.Topic.Id}}">
+            <button class="btn btn-default">修改文章</button>
+        </a>
+        <a href="/topic/delete?tid={{.Topic.Id}}">
+            <button class="btn btn-default">删除文章</button>
+        </a>{{end}}
+    </h1>
+    <h6 class="text-muted">文章发表于 {{.Topic.Created }} ,共有 {{.Topic.Views }} 次浏览， {{.Topic.ReplyCount}} 个评论</h6>
+{{.Topic.Content}}
+</div>
+
+<div class="container">
+    {{ $tid := .Topic.Id }}
+    {{$IsLogin := .IsLogin}}
+    {{ range .Replies}}
+        <h1>{{.Name}}<small>{{.Created}}</small>
+            {{if $IsLogin}}<a href="/reply/del?id={{.Id}}&tid={{$tid}}"><button class="btn btn-default">刪除評論</button></a>{{end}}</h1>
+        {{.Content}}
+    {{end}}
+    <h3>本文回复</h3>
+    <form method="post" action="/reply/add">
+        <input type="hidden" name="tid" id="" value="{{.Topic.Id}}">
+        <div class="form-group">
+            <label>显示昵称</label>
+            <input type="text" name="nickname" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>内容</label>
+            <textarea name="content" id="" cols="30" rows="10" class="form-control">
+
+            </textarea>
+        </div>
+        <button class="btn btn-default">提交回复</button>
+
+    </form>
+
+
+</div>
+
+<!-- Latest compiled and minified JS -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{{template "header"}}
+
+<title>分類-我的个人博客</title>
+<link rel="stylesheet" href="/static/css/form.css" type="text/css">
+</head>
+<body>
+
+{{ template  "navbar" . }}
+<div class="container">
+    <h1>分類列表</h1>
+    <form method="get" action="/category">
+        <div class="form-group">
+            <label for="name">请输入分类名称</label>
+            <input type="text" class="form-control" id="name" placeholder="name" name="name">
+        </div>
+        <input type="hidden" name="op" value="add">
+        <button type="submit" class="btn btn-default" onclick="return checkInput()">添加</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <th>#</th>
+        <th>名称</th>
+        <th>文章数</th>
+        <th>操作</th>
+        </thead>
+        <tbody>
+        {{range .Categories}}
+        <tr>
+            <th>{{.Id}}</th>
+            <th>{{.Title}}</th>
+            <th>{{.TopicCount}}</th>
+            <th><a href="/category/del?id={{.Id}}">删除</a></th>
+        </tr>
+        {{end}}
+        </tbody>
+
+    </table>
+
+
+</div>
+
+<script>
+    function checkInput() {
+        let uname = document.getElementById("name");
+        if (uname.value.length == 0) {
+            alert("請輸入分类名称");
+            return false
+        }
+
+        return true;
+    }
+
+</script>
+
+</div>
+<!-- Latest compiled and minified JS -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

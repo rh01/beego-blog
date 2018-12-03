@@ -1,0 +1,57 @@
+{{ template "header" }}
+<title>登录-我的个人博客</title>
+<link rel="stylesheet" href="/static/css/form.css" type="text/css">
+</head>
+<body>
+
+{{ template  "navbar" .}}
+<div class="container" style="width: 500px">
+
+    <form method="post" action="/login">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Account</label>
+            <input type="text" class="form-control" id="uname" placeholder="uname" name="uname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Password" name="pwd">
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="autoLogin"> 记住我
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default" onclick="return checkInput()">登录</button>
+        <button class="btn btn-default" onclick="return backToHome()">返回</button>
+    </form>
+</div>
+
+<script>
+    function checkInput() {
+        let uname = document.getElementById("uname");
+        if (uname.value.length == 0) {
+            alert("請輸入賬號");
+            return false
+        }
+
+        let pwd = document.getElementById("pwd");
+        if (pwd.value.length == 0) {
+            alert("請輸入密碼");
+            return false;
+        }
+
+        return true;
+    }
+
+    function backToHome() {
+        window.location.href = "/";
+        return false;
+
+    }
+
+</script>
+
+
+
+</body>

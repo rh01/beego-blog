@@ -1,0 +1,70 @@
+{{template "header"}}
+
+<title>文章-我的个人博客</title>
+<link rel="stylesheet" href="/static/css/form.css" type="text/css">
+</head>
+<body>
+
+{{ template  "navbar" . }}
+<div class="container">
+    {{if .IsLogin}}
+    <a href="/topic/add">
+        <button class="btn btn-default">添加</button>
+    </a>
+        {{end}}
+    <h1>文章列表</h1>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <th>#</th>
+        <th>文章名称</th>
+        <th>最近更新</th>
+        <th>浏览</th>
+        <th>回复数</th>
+        <th>操作</th>
+        </thead>
+        <tbody>
+        {{ $IsLogin := .IsLogin }}
+        {{range .Topics}}
+        <tr>
+            <th>{{.Id}}</th>
+            <th><a href="/topic/view/{{.Id}}">{{.Title}}</a></th>
+            <th>{{.Updated}}</th>
+            <th>{{ .Views}}</th>
+            <th>{{.ReplyCount}}</th>
+            <th>
+                {{if $IsLogin}}
+                <a href="/topic/modify?tid={{.Id}}">修改</a>
+                <a href="/topic/delete?tid={{.Id}}">刪除</a>
+                {{end}}
+            </th>
+        </tr>
+        {{end}}
+        </tbody>
+
+    </table>
+
+
+</div>
+
+<script>
+    function checkInput() {
+        let uname = document.getElementById("name");
+        if (uname.value.length == 0) {
+            alert("請輸入分类名称");
+            return false
+        }
+
+        return true;
+    }
+
+</script>
+
+</div>
+<!-- Latest compiled and minified JS -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
